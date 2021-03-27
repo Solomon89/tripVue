@@ -1,4 +1,4 @@
-# lection2021
+# Лекции по разработке Internet приложений
 
 ## Project setup
 ```
