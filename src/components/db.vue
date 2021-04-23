@@ -23,7 +23,7 @@ async function Post(api, value) {
 }
 
 async function Put(api,id, value) {
-  let linkFull = link + api + `id=${id}`;
+  let linkFull = link + api + `/${id}`;
   const data = await axios.put(linkFull, value);
   return data;
 }

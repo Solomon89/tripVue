@@ -13,24 +13,38 @@ import db from "./db";
 export default {
   name: "TestEdit",
   data() {
-      return {
-            Test: {}
-      }
-    
+    return {
+      Test: {},
+      Tests: [],
+    };
   },
-   mounted() {
-       this.Test = {};
-       this.Test.name = '';
-       this.Test.description = '';
-       this.Test.isActive = true;
-
-   },
-   methods: {
-                Save:async function() {
-                    const data = db.Post("Test?",this.Test)
-                console.log(data);
-                }
-            }
+  async mounted() {
+    if (this.$route.params.TestId > 0) {
+      let response = await db.Get("Test/" + this.$route.params.TestId, [[]]);
+      this.Test = response.data;
+      
+    } else {
+      this.Test = {};
+      this.Test.name = "";
+      this.Test.description = "";
+      this.Test.isActive = true;
+    }
+  },
+  methods: {
+    Save: async function () {
+      let data = "";
+      if(this.Test.id > 0)
+      {
+         data = db.Put("Test",this.Test.id, this.Test);
+      }
+      else
+      {
+        data = db.Post("Test?", this.Test);
+      }
+      
+      console.log(data);
+    },
+  },
 };
 </script>
 
